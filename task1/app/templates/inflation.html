@@ -1,0 +1,54 @@
+<!DOCTYPE html>{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Инфляция в России</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    {% block content %}
+      <div class="row">
+        <h1 class="col s12">Инфляция в России</h1>
+        <div class="col s12 m8">
+          
+          <table>
+            <thead>
+              <tr>
+                {% for header in headers %}
+                  <th>{{ header }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in data %}
+                <tr>
+                  <td>{{ row.year }}</td>
+                  {% for i in row.months %}
+                    <td class="card-panel 
+                              {% if i > 5 %} red accent-3
+                              {% elif i > 2 %} red lighten-2
+                              {% elif i > 1 %} red lighten-3
+                              {% elif i < 0 %} light-green 
+                              {% endif %}">
+                      {{ i }}
+                    </td>
+                  {% endfor %}
+                  <td>{{ row.summ }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    {% endblock %}
+
+  </body>
+</html>
